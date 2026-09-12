@@ -1,0 +1,24 @@
+[package]
+name = "ap-support"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Error-handling macros, environment access, test helpers and logging setup shared by the agent-protocol Rust SDKs"
+
+[features]
+default = []
+# Logging configuration and subscriber installation (`ap_support::logging`).
+logging = ["dep:tracing-subscriber"]
+# `clap` argument group for the logging options (`ap_support::logging::LoggingArgs`).
+cli = ["logging", "dep:clap"]
+
+[dependencies]
+parking_lot = { workspace = true }
+serde_json = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true, optional = true, features = ["json"] }
+clap = { workspace = true, optional = true }
+
+[lints]
+workspace = true

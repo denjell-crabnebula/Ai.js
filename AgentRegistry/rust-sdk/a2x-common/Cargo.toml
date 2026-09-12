@@ -1,0 +1,31 @@
+[package]
+name = "a2x-common"
+description = "Shared models, errors, path resolution and the multi-provider LLM client for the A2X registry"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+ap-support = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+tokio = { workspace = true }
+reqwest = { workspace = true }
+tracing = { workspace = true }
+chrono = { workspace = true }
+dirs = { workspace = true }
+regex = { workspace = true }
+once_cell = { workspace = true }
+parking_lot = { workspace = true }
+futures = { workspace = true }
+async-trait = { workspace = true }
+tempfile = { workspace = true }
+
+[dev-dependencies]
+axum = { workspace = true }
+
+[lints]
+workspace = true

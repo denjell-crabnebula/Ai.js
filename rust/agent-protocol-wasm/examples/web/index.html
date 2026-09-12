@@ -1,0 +1,88 @@
+<!doctype html>
+<!-- SPDX-FileCopyrightText: 2026 Daniel Thompson-Yvetot and CrabNebula -->
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A4P User Authorizer (wasm)</title>
+<style>
+  :root { color-scheme: light dark; font-family: system-ui, sans-serif; }
+  body { margin: 0; padding: 16px; max-width: 1100px; margin-inline: auto; line-height: 1.4; }
+  h1 { font-size: 1.4rem; margin: 0 0 4px; }
+  p.lead { margin-top: 0; opacity: .8; }
+  section { border: 1px solid #8884; border-radius: 8px; padding: 12px 16px; margin-block: 12px; }
+  section h2 { font-size: 1.05rem; margin: 0 0 8px; }
+  textarea { width: 100%; min-height: 110px; font-family: ui-monospace, monospace; font-size: .85rem; box-sizing: border-box; }
+  pre { background: #8881; padding: 8px; border-radius: 6px; overflow-x: auto; font-size: .82rem; white-space: pre-wrap; word-break: break-all; }
+  button { margin: 4px 6px 4px 0; padding: 6px 12px; }
+  .ok { color: #2a7; } .err { color: #d33; }
+  .row { display: flex; flex-wrap: wrap; gap: 12px; } .row > * { flex: 1 1 320px; }
+  label { font-size: .85rem; display: block; margin-top: 6px; }
+</style>
+</head>
+<body>
+<h1>A4P User Authorizer in the browser</h1>
+<p class="lead">The wasm module holds the user's Ed25519 key, verifies A4P Server-signed mandates
+against a local trust store, derives the challenge and signs approved mandates. No private key
+leaves the page. This page works offline; paste JSON obtained from an A4P Server or the Node example.</p>
+
+<section>
+  <h2>1. Device key</h2>
+  <button id="gen">Generate key pair</button>
+  <button id="restore">Restore from seed</button>
+  <label>Seed (base64url, keep private) <input id="seed" size="60"></label>
+  <label>Public key JWK to register at <code>/a4p/v1/user-credentials/ed25519/register</code></label>
+  <pre id="jwk">(no key yet)</pre>
+  <label>Credential id returned by the server <input id="cred" size="40" placeholder="cred_..."></label>
+</section>
+
+<section>
+  <h2>2. Trust store</h2>
+  <p>The Server's public trust configuration <code>{serverId: {keyId: {alg, publicKey}}}</code>.
+  It must come from a protected channel, never from the Agent.</p>
+  <textarea id="trust" placeholder='{"local://a4p": {"server#operation-mandate-k1": {"alg": "EdDSA", "publicKey": "..."}}}'></textarea>
+</section>
+
+<section>
+  <h2>3. Authorization request forwarded by the Agent</h2>
+  <textarea id="request" placeholder='{"mandate": {...}, "signingOptions": {...}}'></textarea>
+  <div>
+    <button id="verify">Verify</button>
+    <button id="sign">Approve and sign</button>
+    <button id="challenge">Derive challenge</button>
+  </div>
+  <div class="row">
+    <div><label>Verified summary shown to the user</label><pre id="summary">-</pre></div>
+    <div><label>Hardened signing options</label><pre id="options">-</pre></div>
+  </div>
+  <label>Signed mandate to return to the Agent</label>
+  <pre id="signed">-</pre>
+  <p id="status"></p>
+</section>
+
+<section>
+  <h2>4. JSON-RPC and SSE playground</h2>
+  <div class="row">
+    <div>
+      <label>Method <input id="method" value="initialize"></label>
+      <label>Params (JSON) <input id="params" value='{"protocolVersion":"2025-06-18"}' size="50"></label>
+      <button id="build">Build request</button>
+      <pre id="rpc">-</pre>
+    </div>
+    <div>
+      <label>SSE stream text</label>
+      <textarea id="sse">event: message
+data: {"jsonrpc":"2.0","method":"notifications/initialized"}
+
+</textarea>
+      <button id="parse">Parse events</button>
+      <pre id="events">-</pre>
+    </div>
+  </div>
+</section>
+
+<script type="module" src="./app.js"></script>
+</body>
+</html>

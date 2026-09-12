@@ -1,0 +1,76 @@
+[package]
+name = "a2x-registry"
+description = "A2X agent service registry: registration, auth, heartbeat leases, cluster replication and the HTTP backend"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[features]
+default = ["search", "cluster"]
+# Wires the A2X build/search engines (crate a2x-search) into the backend.
+search = ["dep:a2x-search"]
+# Wires cluster replication (crate a2x-cluster) into the backend.
+cluster = ["dep:a2x-cluster"]
+
+[dependencies]
+ap-support = { workspace = true, features = ["cli"] }
+a2x-common = { workspace = true }
+a2x-search = { workspace = true, optional = true }
+a2x-cluster = { workspace = true, optional = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+serde_yaml = { workspace = true }
+thiserror = { workspace = true }
+anyhow = { workspace = true }
+tokio = { workspace = true }
+tokio-stream = { workspace = true }
+tokio-util = { workspace = true }
+futures = { workspace = true }
+futures-util = { workspace = true }
+async-trait = { workspace = true }
+async-stream = { workspace = true }
+bytes = { workspace = true }
+axum = { workspace = true }
+tower = { workspace = true }
+tower-http = { workspace = true }
+http = { workspace = true }
+reqwest = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+uuid = { workspace = true }
+chrono = { workspace = true }
+parking_lot = { workspace = true }
+dashmap = { workspace = true }
+once_cell = { workspace = true }
+indexmap = { workspace = true }
+regex = { workspace = true }
+walkdir = { workspace = true }
+zip = { workspace = true }
+sha2 = { workspace = true }
+hex = { workspace = true }
+rand = { workspace = true }
+base64 = { workspace = true }
+clap = { workspace = true }
+num_cpus = { workspace = true }
+dirs = { workspace = true }
+tempfile = { workspace = true }
+
+[dev-dependencies]
+anyhow = { workspace = true }
+regex = { workspace = true }
+http-body-util = { workspace = true }
+tokio-tungstenite = "0.29"
+tokio = { workspace = true, features = ["test-util"] }
+
+[[bin]]
+name = "a2x-registry"
+path = "src/bin/a2x_registry.rs"
+
+[[bin]]
+name = "a2x-register"
+path = "src/bin/a2x_register.rs"
+
+[lints]
+workspace = true

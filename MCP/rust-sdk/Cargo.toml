@@ -1,0 +1,53 @@
+[package]
+name = "mcp-sdk"
+description = "Model Context Protocol (MCP) client and server SDK with Streamable HTTP and stdio transports"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lib]
+name = "mcp_sdk"
+
+[dependencies]
+ap-jsonrpc = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+tokio = { workspace = true }
+tokio-stream = { workspace = true }
+tokio-util = { workspace = true }
+futures = { workspace = true }
+futures-util = { workspace = true }
+async-trait = { workspace = true }
+async-stream = { workspace = true }
+bytes = { workspace = true }
+axum = { workspace = true }
+axum-server = { workspace = true }
+tower = { workspace = true }
+tower-http = { workspace = true }
+http = { workspace = true }
+reqwest = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+uuid = { workspace = true }
+chrono = { workspace = true }
+parking_lot = { workspace = true }
+dashmap = { workspace = true }
+once_cell = { workspace = true }
+url = { workspace = true }
+base64 = { workspace = true }
+regex = { workspace = true }
+# TLS server configuration (certificate, key and optional client CA). Versions match the
+# workspace lock file, where both crates already appear as transitive dependencies.
+rustls = { version = "0.23", default-features = false, features = ["ring", "std", "tls12", "logging"] }
+rustls-pemfile = "2"
+
+[dev-dependencies]
+ap-support = { workspace = true }
+tempfile = { workspace = true }
+anyhow = { workspace = true }
+
+[lints]
+workspace = true

@@ -1,1 +1,11 @@
 .venv/
+/target
+/target-*
+**/*.rs.bk
+*.pdb
+*.log
+.DS_Store
+/database
+/.a2x_registry
+/rust/agent-protocol-wasm/pkg
+/.a4p

@@ -1,0 +1,57 @@
+[package]
+name = "a2x-search"
+description = "A2X hierarchical taxonomy build and LLM-navigated search, plus vector and traditional baselines and evaluation CLIs"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+ap-support = { workspace = true, features = ["cli"] }
+a2x-common = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+tokio = { workspace = true }
+tokio-util = { workspace = true }
+futures = { workspace = true }
+async-trait = { workspace = true }
+reqwest = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+chrono = { workspace = true }
+parking_lot = { workspace = true }
+indexmap = { workspace = true }
+regex = { workspace = true }
+once_cell = { workspace = true }
+sha2 = { workspace = true }
+hex = { workspace = true }
+clap = { workspace = true }
+
+[dev-dependencies]
+tempfile = { workspace = true }
+axum = { workspace = true }
+
+[[bin]]
+name = "a2x-build"
+path = "src/bin/a2x_build.rs"
+
+[[bin]]
+name = "a2x-search"
+path = "src/bin/a2x_search.rs"
+
+[[bin]]
+name = "a2x-evaluate-a2x"
+path = "src/bin/a2x_evaluate_a2x.rs"
+
+[[bin]]
+name = "a2x-evaluate-vector"
+path = "src/bin/a2x_evaluate_vector.rs"
+
+[[bin]]
+name = "a2x-evaluate-traditional"
+path = "src/bin/a2x_evaluate_traditional.rs"
+
+[lints]
+workspace = true

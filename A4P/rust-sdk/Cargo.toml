@@ -1,0 +1,65 @@
+[package]
+name = "a4p"
+description = "A4P (Agentic Authentication, Authorization and Audit Protocol) SDK: mandates, intent tokens, user signatures, server and client"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[features]
+default = ["http-server", "client", "sqlite"]
+# The axum HTTP transport (`a4p::http_server`).
+http-server = ["dep:axum", "dep:http", "dep:tokio"]
+# The reqwest HTTP client (`a4p::client`).
+client = ["dep:reqwest", "dep:tokio"]
+# The SQLite intent-token usage store. Without it the server defaults to the
+# in-memory store.
+sqlite = ["dep:rusqlite"]
+
+# The crate core (mandates, tokens, scope matching, user signatures and the
+# local User Authorizer helpers) has no native-only dependency and compiles
+# for wasm32 with `--no-default-features`.
+[dependencies]
+ap-support = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+async-trait = { workspace = true }
+tracing = { workspace = true }
+chrono = { workspace = true }
+parking_lot = { workspace = true }
+once_cell = { workspace = true }
+ed25519-dalek = { workspace = true }
+p256 = { workspace = true }
+rsa = { workspace = true }
+sha2 = { workspace = true }
+base64 = { workspace = true }
+hex = { workspace = true }
+rand = { workspace = true }
+rand_core = { workspace = true }
+ciborium = { workspace = true }
+tokio = { workspace = true, optional = true }
+axum = { workspace = true, optional = true }
+http = { workspace = true, optional = true }
+reqwest = { workspace = true, optional = true }
+rusqlite = { workspace = true, optional = true }
+
+[dev-dependencies]
+ap-support = { workspace = true, features = ["logging"] }
+tempfile = { workspace = true }
+anyhow = { workspace = true }
+tokio = { workspace = true }
+tracing-subscriber = { workspace = true }
+indexmap = { workspace = true }
+clap = { workspace = true }
+url = { workspace = true }
+urlencoding = { workspace = true }
+http = { workspace = true }
+
+[[example]]
+name = "run_user_authorizer"
+test = true
+
+[lints]
+workspace = true

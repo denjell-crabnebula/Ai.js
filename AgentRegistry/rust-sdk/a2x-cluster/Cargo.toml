@@ -1,0 +1,45 @@
+[package]
+name = "a2x-cluster"
+description = "A2X registry cluster replication: full-mesh gossip, LWW envelopes, Merkle anti-entropy and liveness eviction"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+ap-support = { workspace = true, features = ["cli"] }
+a2x-common = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+anyhow = { workspace = true }
+tokio = { workspace = true }
+tokio-util = { workspace = true }
+futures = { workspace = true }
+async-trait = { workspace = true }
+axum = { workspace = true }
+http = { workspace = true }
+reqwest = { workspace = true }
+tracing = { workspace = true }
+uuid = { workspace = true }
+chrono = { workspace = true }
+parking_lot = { workspace = true }
+dashmap = { workspace = true }
+once_cell = { workspace = true }
+indexmap = { workspace = true }
+sha2 = { workspace = true }
+hex = { workspace = true }
+rand = { workspace = true }
+clap = { workspace = true }
+tempfile = { workspace = true }
+dirs = { workspace = true }
+
+[dev-dependencies]
+
+[[bin]]
+name = "a2x-cluster"
+path = "src/bin/a2x-cluster.rs"
+
+[lints]
+workspace = true

@@ -1,0 +1,40 @@
+[package]
+name = "a2x-registry-client"
+description = "Client SDK and CLI for the A2X agent service registry"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lib]
+name = "a2x_registry_client"
+path = "src/lib.rs"
+
+[[bin]]
+name = "a2x-registry-client"
+path = "src/main.rs"
+
+[dependencies]
+ap-support = { workspace = true, features = ["cli"] }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+tokio = { workspace = true }
+futures = { workspace = true }
+reqwest = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+parking_lot = { workspace = true }
+clap = { workspace = true }
+dirs = { workspace = true }
+fs2 = { workspace = true }
+
+[dev-dependencies]
+tokio = { workspace = true, features = ["test-util"] }
+axum = { workspace = true }
+tempfile = { workspace = true }
+url = { workspace = true }
+
+[lints]
+workspace = true

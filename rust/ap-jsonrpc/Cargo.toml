@@ -1,0 +1,21 @@
+[package]
+name = "ap-jsonrpc"
+description = "JSON-RPC 2.0 message types and Server-Sent Events parsing shared by the agent-protocol SDKs"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+bytes = { workspace = true }
+
+[dev-dependencies]
+parking_lot = { workspace = true }
+ap-support = { workspace = true }
+
+[lints]
+workspace = true

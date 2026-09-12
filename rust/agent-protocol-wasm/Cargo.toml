@@ -1,0 +1,35 @@
+[package]
+name = "agent-protocol-wasm"
+description = "WebAssembly bindings for the agent-protocol SDKs: JSON-RPC and SSE wire helpers plus the A4P user-side authorizer (verify, challenge, sign)"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+a4p = { workspace = true }
+ap-jsonrpc = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+ed25519-dalek = { workspace = true }
+wasm-bindgen = "=0.2.128"
+serde-wasm-bindgen = "0.6"
+js-sys = "0.3"
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+# Route `OsRng` to `crypto.getRandomValues` and `Utc::now()` to `Date.now()`.
+getrandom = { version = "0.2", features = ["js"] }
+chrono = { workspace = true, features = ["wasmbind"] }
+console_error_panic_hook = "0.1"
+
+[dev-dependencies]
+parking_lot = { workspace = true }
+ap-support = { workspace = true }
+wasm-bindgen-test = "0.3"
+
+[lints]
+workspace = true
